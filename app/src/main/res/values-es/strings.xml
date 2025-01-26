@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clean MVVM Architecture</string>
+    <string name="home">Inicio</string>
+    <string name="search">Buscar</string>
+    <string name="profile">Perfil</string>
+    <string name="settings">Ajustes</string>
+    <string name="language">Idioma</string>
+    <string name="select_language">Seleccionar Idioma</string>
+    <string name="cancel">Cancelar</string>
+</resources> 
