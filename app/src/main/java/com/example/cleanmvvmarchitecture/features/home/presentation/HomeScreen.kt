@@ -30,7 +30,7 @@ fun HomeScreen(
     val uiState by viewModel.uiState.collectAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val currentLanguage by viewModel.currentLanguage.collectAsState()
+    val currentLanguage by viewModel.currentLanguage.collectAsState(initial = "en")
 
     ModalNavigationDrawer(
         drawerState = drawerState,
