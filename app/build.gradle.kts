@@ -91,6 +91,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    hilt {
+        enableAggregatingTask = false
+    }
 }
 
 dependencies {
@@ -127,7 +130,11 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    
+
+    // Datastore
+    implementation(libs.datastore.preferences)
+    implementation(libs.datastore.core)
+
     // Testing
     "testImplementation"(libs.junit)
     "testImplementation"(libs.mockito.kotlin)

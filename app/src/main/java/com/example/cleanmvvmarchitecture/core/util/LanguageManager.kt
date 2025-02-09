@@ -10,7 +10,7 @@ import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private val Context.dataStore by preferencesDataStore(name = "settings")
+private val Context.dataStore by preferencesDataStore("settings")
 
 @Singleton
 class LanguageManager @Inject constructor(
@@ -19,13 +19,13 @@ class LanguageManager @Inject constructor(
     private val LANGUAGE_KEY = stringPreferencesKey("language")
 
     val currentLanguage: Flow<String> = context.dataStore.data
-        .map { preferences ->
-            preferences[LANGUAGE_KEY] ?: Locale.getDefault().language
+        .map {
+            it[LANGUAGE_KEY] ?: Locale.getDefault().language
         }
 
     suspend fun setLanguage(languageCode: String) {
-        context.dataStore.edit { preferences ->
-            preferences[LANGUAGE_KEY] = languageCode
+        context.dataStore.edit {
+            it[LANGUAGE_KEY] = languageCode
         }
     }
 

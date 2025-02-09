@@ -1,6 +1,7 @@
 package com.example.cleanmvvmarchitecture.core.di
 
 import com.example.cleanmvvmarchitecture.core.config.AppConfig
+import com.example.cleanmvvmarchitecture.features.auth.data.remote.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,5 +50,11 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(retrofit: Retrofit): AuthApi {
+        return retrofit.create(AuthApi::class.java)
     }
 } 
