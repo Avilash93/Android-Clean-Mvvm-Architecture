@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -24,7 +25,7 @@ import com.example.cleanmvvmarchitecture.features.home.domain.model.Post
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navController: NavController,
+    navController: NavController? = null,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -60,7 +61,7 @@ fun HomeScreen(
                     },
                     actions = {
                         IconButton(
-                            onClick = { navController.navigate(NavRoutes.Profile.route) }
+                            onClick = { navController?.navigate(NavRoutes.Profile.route) }
                         ) {
                             Icon(Icons.Default.AccountCircle, contentDescription = "Profile")
                         }
@@ -68,7 +69,9 @@ fun HomeScreen(
                 )
             },
             bottomBar = {
-                AppBottomNavigation(navController)
+                if (navController != null) {
+                    AppBottomNavigation(navController)
+                }
             }
         ) { padding ->
             when (val state = uiState) {
@@ -157,4 +160,10 @@ fun PostCard(post: Post) {
             }
         }
     }
-} 
+}
+
+@Preview
+@Composable
+private fun preView() {
+    HomeScreen()
+}

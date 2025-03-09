@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -16,7 +17,7 @@ import com.example.cleanmvvmarchitecture.core.navigation.NavRoutes
 
 @Composable
 fun LoginScreen(
-    navController: NavController,
+    navController: NavController? = null,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     var email by remember { mutableStateOf("") }
@@ -26,7 +27,7 @@ fun LoginScreen(
     LaunchedEffect(uiState) {
         when (uiState) {
             is LoginUiState.Success -> {
-                navController.navigate(NavRoutes.Home.route) {
+                navController?.navigate(NavRoutes.Home.route) {
                     popUpTo(NavRoutes.Login.route) { inclusive = true }
                 }
             }
@@ -99,7 +100,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             TextButton(
-                onClick = { navController.navigate(NavRoutes.Register.route) }
+                onClick = { navController?.navigate(NavRoutes.Register.route) }
             ) {
                 Text("Don't have an account? Sign up")
             }
@@ -114,4 +115,9 @@ fun LoginScreen(
             }
         }
     }
-} 
+}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    LoginScreen()
+}

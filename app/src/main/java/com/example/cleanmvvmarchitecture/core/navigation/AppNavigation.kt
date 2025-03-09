@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.cleanmvvmarchitecture.core.util.Utils
 import com.example.cleanmvvmarchitecture.features.auth.presentation.login.LoginScreen
 import com.example.cleanmvvmarchitecture.features.auth.presentation.register.RegisterScreen
 import com.example.cleanmvvmarchitecture.features.home.presentation.HomeScreen
@@ -12,6 +13,7 @@ import com.example.cleanmvvmarchitecture.features.splash.presentation.SplashScre
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
+    Utils.LogCurrentScreenLifecycle(navController)
     NavHost(
         navController = navController,
         startDestination = NavRoutes.Splash.route
