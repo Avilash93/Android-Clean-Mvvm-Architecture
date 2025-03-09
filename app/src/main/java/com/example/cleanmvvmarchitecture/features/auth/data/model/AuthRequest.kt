@@ -1,7 +1,7 @@
 package com.example.cleanmvvmarchitecture.features.auth.data.model
 
 data class LoginRequest(
-    val email: String,
+    val username: String,
     val password: String
 )
 

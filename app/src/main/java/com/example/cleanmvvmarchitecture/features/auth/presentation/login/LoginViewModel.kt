@@ -2,6 +2,7 @@ package com.example.cleanmvvmarchitecture.features.auth.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cleanmvvmarchitecture.core.datastore.DataStoreManager
 import com.example.cleanmvvmarchitecture.features.auth.data.model.LoginRequest
 import com.example.cleanmvvmarchitecture.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Initial)
@@ -24,7 +26,9 @@ class LoginViewModel @Inject constructor(
             authRepository.login(LoginRequest(email, password))
                 .collect { result ->
                     _uiState.value = when {
-                        result.isSuccess -> LoginUiState.Success
+                        result.isSuccess -> {
+                            dataStoreManager.setIsLoggedIn(true)
+                            LoginUiState.Success}
                         result.isFailure -> LoginUiState.Error(
                             result.exceptionOrNull()?.message ?: "Unknown error"
                         )

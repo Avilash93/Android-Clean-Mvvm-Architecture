@@ -11,6 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.example.cleanmvvmarchitecture.core.navigation.AppNavigation
 import com.example.cleanmvvmarchitecture.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,12 +26,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme  {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+             /*   Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
-                }
+                }*/
+                Greeting("Android")
             }
         }
     }
@@ -34,10 +40,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+  val navController = rememberNavController()
+    AppNavigation(navController)
 }
 
 @Preview(showBackground = true)
