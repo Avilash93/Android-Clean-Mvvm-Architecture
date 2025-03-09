@@ -2,6 +2,7 @@ package com.example.cleanmvvmarchitecture.core.di
 
 import com.example.cleanmvvmarchitecture.core.config.AppConfig
 import com.example.cleanmvvmarchitecture.features.auth.data.remote.AuthApi
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ object NetworkModule {
                 if (appConfig.isLoggingEnabled) {
                     addInterceptor(HttpLoggingInterceptor().apply {
                         level = HttpLoggingInterceptor.Level.BODY
-                    })
+                    }).addInterceptor(OkHttpProfilerInterceptor())
                 }
                 addInterceptor { chain ->
                     val original = chain.request()

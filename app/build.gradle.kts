@@ -41,7 +41,7 @@ android {
             dimension = "environment"
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            buildConfigField("String", "BASE_URL", "\"https://api-dev.example.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://dummyjson.com/\"")
             buildConfigField("String", "API_KEY", "\"dev_api_key\"")
         }
 
@@ -134,6 +134,11 @@ dependencies {
     // Datastore
     implementation(libs.datastore.preferences)
     implementation(libs.datastore.core)
+
+    //Timber
+    implementation(libs.timber)
+    //OkHttp
+    implementation(libs.okHtpp)
 
     // Testing
     "testImplementation"(libs.junit)
